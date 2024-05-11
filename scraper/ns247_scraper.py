@@ -22,12 +22,16 @@ class Ns247Scraper(BaseScraper):
                 # rows like the date tag only have one `td`
                 if (len(sub_tags)) > 1:
                     home_team = sub_tags[0]
-                    match_url = sub_tags[1]
                     away_team = sub_tags[2]
+                    onclick_value = sub_tags[1].find("input")["onclick"]
+                    start_index = onclick_value.find("'") + 1
+                    end_index = onclick_value.find("'", start_index)
+                    match_page_url = onclick_value[start_index:end_index]
+
                     match = Match(
                         home_team=home_team.find("p").text,
                         home_team_logo_url=home_team.find("img").get("src"),
-                        match_url="",  # TODO: check when a match is going on to see if the value of `onClick` changes
+                        match_page_url=match_page_url,
                         away_team=away_team.find("p").text,
                         away_team_logo_url=away_team.find("img").get("src"),
                     )
