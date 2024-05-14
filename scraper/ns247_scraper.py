@@ -6,10 +6,11 @@ from typing import List
 
 
 class Ns247Scraper(BaseScraper):
-    def __init__(self, base_url: str = "https://naijasport247.com/live/") -> None:
+    def __init__(self, base_url: str = "https://naijasport247.com/") -> None:
         super().__init__(base_url)
 
-    def get_matches(self) -> LiveMatches:
+    def get_matches(self, path: str = "live/") -> LiveMatches:
+        super().get_matches(f"{self.base_url}{path}")
         tags: List[ResultSet] = self.soup.find_all("tr")
         live_matches: LiveMatches = None
         matches: list[Match] = []
@@ -45,6 +46,12 @@ class Ns247Scraper(BaseScraper):
                 pass
 
         return live_matches
+
+    def get_match_video_link(self, path: str =""):
+        super().get_match_video_link(path)
+
+    def get_highlights(self, path: str = "highlights/"):
+        super().get_highlights(path)
 
 
 if __name__ == "__main__":
