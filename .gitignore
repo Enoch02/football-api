@@ -3,3 +3,4 @@ scraper/__pycache__/
 api/__pycache__/
 temp.html
 *.pyc
+tree.txt

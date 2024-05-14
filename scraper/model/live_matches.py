@@ -6,3 +6,6 @@ from . import match
 class LiveMatches:
     date: str
     matches: list[match.Match]
+
+    def to_dict(self) -> dict[str, any]:
+        return {"date": self.date.strip("\n"), "matches": self.matches}

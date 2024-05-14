@@ -1,6 +1,5 @@
 from bs4 import BeautifulSoup
 import mechanicalsoup
-import requests
 
 class BaseScraper:
     def __init__(self, base_url: str) -> None:

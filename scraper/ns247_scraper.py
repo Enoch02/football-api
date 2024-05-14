@@ -1,7 +1,7 @@
 from bs4 import ResultSet
-from base_scraper import BaseScraper
-from model.live_matches import LiveMatches
-from model.match import Match
+from .base_scraper import BaseScraper
+from .model.live_matches import LiveMatches
+from .model.match import Match
 from typing import List
 
 
