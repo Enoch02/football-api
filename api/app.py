@@ -19,13 +19,17 @@ def get_matches(source: int):
     live_matches: LiveMatches = None
     message = {"error": "Invalid source selected"}
 
-    match source:
-        case 1:
-            live_matches = ns_scraper.get_matches()
+    try:
+        match source:
+            case 1:
+                live_matches = ns_scraper.get_matches()
 
-            return jsonify(live_matches.to_dict())
-        case _:
-            return jsonify(message)
+                return jsonify(live_matches.to_dict())
+            case _:
+                return jsonify(message)
+    except Exception as e:
+        message["error"] = str(e)
+        return jsonify(message)
 
 
 @app.errorhandler(404)
