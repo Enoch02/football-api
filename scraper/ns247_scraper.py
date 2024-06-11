@@ -33,6 +33,7 @@ class Ns247Scraper(BaseScraper):
                         home_team=home_team.find("p").text,
                         home_team_logo_url=home_team.find("img").get("src"),
                         match_page_url=match_page_url,
+                        channel= match_page_url.split("/")[3],
                         away_team=away_team.find("p").text,
                         away_team_logo_url=away_team.find("img").get("src"),
                     )
@@ -47,8 +48,8 @@ class Ns247Scraper(BaseScraper):
 
         return live_matches
 
-    def get_match_video_link(self, path: str =""):
-        super().get_match_video_link(path)
+    def get_match_stream_link(self, path: str =""):
+        super().get_match_stream_link(f"{self.base_url}/{path}/")
 
     def get_highlights(self, path: str = "highlights/"):
         super().get_highlights(path)

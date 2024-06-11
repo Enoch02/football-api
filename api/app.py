@@ -35,6 +35,11 @@ def get_matches(source: int):
     except Exception as e:
         message["error"] = str(e)
         return jsonify(message)
+    
+
+@app.route("/get_stream/<channel>")
+def get_match_stream_link(channel: str):
+    stream_link = Ns247Scraper.get_match_stream_link(channel)
 
 
 @app.errorhandler(404)
