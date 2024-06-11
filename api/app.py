@@ -1,6 +1,7 @@
 from flask import Flask, jsonify, request
 from scraper.model.live_matches import LiveMatches
 from scraper.ns247_scraper import Ns247Scraper
+from api.util import list_endpoints
 
 app = Flask(__name__)
 ns_scraper = Ns247Scraper()
@@ -8,7 +9,11 @@ ns_scraper = Ns247Scraper()
 
 @app.route("/")
 def root():
-    message = {"greetings": "Welcome to my football streaming api"}
+    available_endpoints = list_endpoints(app)
+    message = {
+        "greetings": "Welcome to my football streaming api",
+        "endpoints": available_endpoints[1:]
+    }
     response = jsonify(message)
 
     return response
