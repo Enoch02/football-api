@@ -1,9 +1,14 @@
+"""
+A match model
+"""
+
 from dataclasses import dataclass
 
 
-# TODO: may have to rename this to NSMatch in the future, use different models for different sites
 @dataclass
-class Match:
+class NS247Match:
+    """A model that provides information about a match"""
+
     home_team: str
     home_team_logo_url: str
     match_page_url: str
@@ -12,6 +17,7 @@ class Match:
     away_team_logo_url: str
 
     def to_dict(self) -> dict[str, any]:
+        """Get the dict representation of this object"""
         return {
             "home_team": self.home_team,
             "home_team_logo_url": self.home_team_logo_url,
