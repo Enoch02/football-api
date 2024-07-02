@@ -1,6 +1,7 @@
 import os
 import subprocess
 
+
 def check_pylint_scores():
     """
     Runs pylint on all .py files in the current directory and checks if they are all rated 10/10.

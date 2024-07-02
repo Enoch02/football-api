@@ -71,5 +71,18 @@ class Ns247Scraper(BaseScraper):
     def get_match_stream_link(self, path: str = ""):
         super().get_match_stream_link(f"{self.base_url}/{path}/")
 
+        try:
+            iframe_tag = self.soup.find("iframe")
+
+            if iframe_tag and 'src' in iframe_tag.attrs:
+                video_url = iframe_tag['src']
+
+                return video_url
+            else:
+                return None
+
+        except AttributeError:
+            return None
+
     def get_highlights(self, path: str = "highlights/"):
         super().get_highlights(path)

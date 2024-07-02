@@ -1,7 +1,8 @@
-from flask import Flask, jsonify, request
+from flask import Flask, abort, jsonify, request
+
+from api.util import list_endpoints
 from scraper.model.live_matches import NS247LiveMatches
 from scraper.ns247_scraper import Ns247Scraper
-from api.util import list_endpoints
 
 app = Flask(__name__)
 ns_scraper = Ns247Scraper()
@@ -19,7 +20,7 @@ def root():
     return response
 
 
-@app.route("/live_matches/<int:source>")
+@app.route("/get_matches/<int:source>")
 def get_matches(source: int):
     live_matches: NS247LiveMatches = None
     message = {"error": "Invalid source selected"}
@@ -38,8 +39,14 @@ def get_matches(source: int):
     
 
 @app.route("/get_stream/<channel>")
-def get_match_stream_link(channel: str):
-    stream_link = Ns247Scraper.get_match_stream_link(channel)
+def get_stream(channel: str):
+    stream_url = ns_scraper.get_match_stream_link(channel)
+    
+    if stream_url is None:
+        abort(404)
+    else:
+        message = {"stream_url": stream_url}
+        return jsonify(message)
 
 
 @app.errorhandler(404)

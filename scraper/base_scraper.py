@@ -2,8 +2,8 @@
 The base scraper module
 """
 
-from bs4 import BeautifulSoup
 import mechanicalsoup
+from bs4 import BeautifulSoup
 from requests import Response
 
 
